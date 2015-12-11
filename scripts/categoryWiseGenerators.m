@@ -1,8 +1,7 @@
 function [totalVerbsInCategory, verbProbabilities] = categoryWiseGenerators( categoryName )
 %UNTITLED2 Calculates probability of each verb occuring for a given
 %category
-verb = 0;
-ext = 1;
+
  categoryFiles = dir(fullfile('ML10701-ESL','clustered_raw',categoryName,'*.txt'));
  docwiseVerbCounts = zeros(size(categoryFiles));
  docNames = struct2table(categoryFiles);
@@ -15,8 +14,8 @@ ext = 1;
  
  verbCounts = zeros(size(verbList));
  
- for i = 1:size(verbList)
-     for j = 1:size(categoryFiles)
+ for i = 1:size(verbList, 1)
+     for j = 1:size(categoryFiles, 1)
          freadid = fopen(categoryFiles(j).name);
          extractedWords=textscan(freadid,'%s', 'Delimiter',' ');
          newVerbCount = length(find(strcmp(extractedWords{1},verbList{i})));
