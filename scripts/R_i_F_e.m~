@@ -1,0 +1,10 @@
+function [ pairwiseprobmatrix_R_i_f_e ] = R_i_f_e( categoryName, verbList, maxDocVerbsInCategory )
+% Generates for each category:
+% 2) {R^{i,e}}_f = P(V_t = f | G_t = i, V_{t-1} = e)
+% Access {R^{i,e}}_f as pairwiseprobmatrix_R_i_f_e(e
+ verblistsize = size(verbList);
+ pairwiseprobmatrix_R_i_f_e = rand([verblistsize, verblistsize * maxDocVerbsInCategory]);
+ TT = table(transitionprobs_Q_i_j);
+ writetable(TT, sprintf('%s_transitionprobs_Q_i_j.dat', categoryName));
+end
+

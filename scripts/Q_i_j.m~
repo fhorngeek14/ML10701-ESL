@@ -1,0 +1,9 @@
+function [ transitionprobabilitymatrix ] = Q_i_j( categoryName, maxDocVerbsInCategory )
+% Generates
+% 1) Q_{i,j} = P(G_{t+1} = j | G_t = i)
+    transitioncnt = maxDocVerbsInCategory + ;
+
+
+
+end
+
