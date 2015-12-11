@@ -11,6 +11,6 @@ verbProbabilitiesInCategory = zeros(size(categories));
 transitionprobs_Q_i_j = zeros([size(categories), 50]);
 
 for i = 1:size(categories)
-    [totalVerbsInCategory(i), verbProbabilitiesInCategory(i)] = categoryWiseGenerators(categories(i));
+    [totalVerbsInCategory(i), ~] = categoryWiseGenerators(categories{i});
 end
 

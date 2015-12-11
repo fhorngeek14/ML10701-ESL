@@ -1,6 +1,8 @@
-function [verbCounts, verbProbabilities] = categoryWiseGenerators( categoryName )
+function [totalVerbsInCategory, verbProbabilities] = categoryWiseGenerators( categoryName )
 %UNTITLED2 Calculates probability of each verb occuring for a given
 %category
+verb = 0;
+ext = 1;
  categoryFiles = dir(fullfile('ML10701-ESL','clustered_raw',categoryName,'*.txt'));
  docwiseVerbCounts = zeros(size(categoryFiles));
  docNames = struct2table(categoryFiles);
@@ -17,7 +19,7 @@ function [verbCounts, verbProbabilities] = categoryWiseGenerators( categoryName 
      for j = 1:size(categoryFiles)
          freadid = fopen(categoryFiles(j).name);
          extractedWords=textscan(freadid,'%s', 'Delimiter',' ');
-         newVerbCount = sum(cell2mat(strfind(extractedWords{1},verbList{i})));
+         newVerbCount = length(find(strcmp(extractedWords{1},verbList{i})));
          verbCounts(i) = verbCounts(i) + newVerbCount;
          docwiseVerbCounts(j) = docwiseVerbCounts(j) + newVerbCount;
          fclose(freadid);
@@ -37,8 +39,8 @@ function [verbCounts, verbProbabilities] = categoryWiseGenerators( categoryName 
  
  maxDocVerbsInCategory = max(docwiseVerbCounts);
  transitionprobs_Q_i_j = Q_i_j(categoryName, maxDocVerbsInCategory);
- pairwiseprobmatrix_R_i_f_e = R_i_f_e(categoryName, verbList, maxDocVerbsInCategory);
- pairwisejointprobs_R_i_f = R_i_f(categoryName, pairwiseprobmatrix_R_i_f_e, verbList, maxDocVerbsInCategory);
+%  pairwiseprobmatrix_R_i_f_e = R_i_f_e(categoryName, verbList, maxDocVerbsInCategory);
+%  pairwisejointprobs_R_i_f = R_i_f(categoryName, pairwiseprobmatrix_R_i_f_e, verbList, maxDocVerbsInCategory);
  
  fclose(dictionaryFid);
 end
